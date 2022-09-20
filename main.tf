@@ -12,8 +12,121 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-resource "random_string" "string" {
-  length  = var.length
-  number  = var.number
-  special = var.special
+resource "aws_ecs_service" "main" {
+  name                               = var.name
+  launch_type                        = var.launch_type
+  deployment_minimum_healthy_percent = var.deployment_minimum_healthy_percent
+  deployment_maximum_percent         = var.deployment_maximum_percent
+  cluster                            = var.ecs_cluster
+  task_definition                    = var.task_definition_arn
+  desired_count                      = var.desired_count
+  wait_for_steady_state              = var.wait_for_steady_state
+  tags = merge(
+    var.tags,
+    {
+      "Name" = var.name
+    },
+  )
+
+  load_balancer {
+    target_group_arn = var.lb_group_arn
+    container_name   = var.container_name
+    container_port   = var.container_port
+  }
+
+  network_configuration {
+    assign_public_ip = var.assign_public_ip
+    security_groups  = var.security_groups
+    subnets          = var.subnets
+  }
+
+  # Commenting out, only required for EC2 based clusters and ignoring those settings for now
+  # ordered_placement_strategy {
+  #   type  = "spread"
+  #   field = "instanceId"
+  # }
+
+  lifecycle {
+    ignore_changes = [desired_count]
+  }
+}
+
+resource "aws_appautoscaling_target" "task" {
+  count      = var.autoscaling_enabled ? 1 : 0
+  depends_on = [aws_ecs_service.main]
+
+  max_capacity       = var.scale_level_4_adjustment
+  min_capacity       = var.desired_count
+  resource_id        = aws_ecs_service.main.name
+  scalable_dimension = "ecs:service:DesiredCount"
+  service_namespace  = "ecs"
+}
+
+resource "aws_appautoscaling_policy" "scale_down" {
+  count = var.autoscaling_enabled ? 1 : 0
+  depends_on = [
+    aws_ecs_service.main,
+    aws_appautoscaling_target.task,
+  ]
+
+  name               = "${var.naming_prefix}-scale-down-000"
+  policy_type        = "StepScaling"
+  resource_id        = aws_ecs_service.main.name
+  scalable_dimension = "ecs:service:DesiredCount"
+  service_namespace  = "ecs"
+
+  step_scaling_policy_configuration {
+    adjustment_type         = "ChangeInCapacity"
+    cooldown                = 60
+    metric_aggregation_type = "Maximum"
+
+    step_adjustment {
+      metric_interval_upper_bound = 0
+      scaling_adjustment          = "-${var.scale_level_4_adjustment}"
+    }
+  }
+}
+
+resource "aws_appautoscaling_policy" "scale_up" {
+  count = var.autoscaling_enabled ? 1 : 0
+  depends_on = [
+    aws_ecs_service.main,
+    aws_appautoscaling_target.task,
+  ]
+
+  name               = "${var.naming_prefix}-scale-up-000"
+  policy_type        = "StepScaling"
+  resource_id        = aws_ecs_service.main.name
+  scalable_dimension = "ecs:service:DesiredCount"
+  service_namespace  = "ecs"
+
+  step_scaling_policy_configuration {
+    adjustment_type         = "ChangeInCapacity"
+    cooldown                = 60
+    metric_aggregation_type = "Minimum"
+
+    step_adjustment {
+      metric_interval_lower_bound = var.scale_level_1_lower
+      metric_interval_upper_bound = var.scale_level_1_upper
+      scaling_adjustment          = var.scale_level_1_adjustment
+    }
+
+    step_adjustment {
+      metric_interval_lower_bound = var.scale_level_1_upper
+      metric_interval_upper_bound = var.scale_level_2_upper
+      scaling_adjustment          = var.scale_level_2_adjustment
+    }
+
+    step_adjustment {
+      metric_interval_lower_bound = var.scale_level_2_upper
+      metric_interval_upper_bound = var.scale_level_3_upper
+      scaling_adjustment          = var.scale_level_3_adjustment
+    }
+
+    step_adjustment {
+      metric_interval_lower_bound = var.scale_level_3_upper
+      metric_interval_upper_bound = ""
+      scaling_adjustment          = var.scale_level_4_adjustment
+    }
+  }
 }

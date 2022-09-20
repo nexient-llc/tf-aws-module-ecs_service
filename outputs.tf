@@ -12,6 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-output "string" {
-  value = random_string.string.result
+output "id" {
+  description = "Service ID"
+  value       = aws_ecs_service.main.id
+}
+
+output "name" {
+  description = "Service Name"
+  value       = aws_ecs_service.main.name
 }
