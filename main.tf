@@ -16,6 +16,7 @@ module "task" {
   source = "github.com/nexient-llc/tf-aws-module-ecs_task.git"
 
   log_group_name = var.log_group_name
+  log_group_arn  = var.log_group_arn
 }
 
 # pull in variables and outputs.
@@ -30,6 +31,7 @@ module "alb" {
 
   name               = var.load_balancer_name
   load_balancer_type = var.load_balancer_type
+
 }
 
 resource "aws_ecs_service" "main" {
