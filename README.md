@@ -25,8 +25,7 @@ This terraform module sets up an ECS service that utilizes a Load Balancer.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_load_balancer"></a> [load\_balancer](#module\_load\_balancer) | <AWS LB module on the registry> | n/a |
-| <a name="module_task"></a> [task](#module\_task) | <whatever from GH for our module> | n/a |
+| <a name="module_alb"></a> [alb](#module\_alb) | terraform-aws-modules/alb/aws | 8.1.0 |
 
 ## Resources
 
@@ -51,6 +50,7 @@ This terraform module sets up an ECS service that utilizes a Load Balancer.
 | <a name="input_ecs_cluster"></a> [ecs\_cluster](#input\_ecs\_cluster) | Arn of the ecs cluster to use | `any` | n/a | yes |
 | <a name="input_launch_type"></a> [launch\_type](#input\_launch\_type) | Enter FARGATE or EC2 for launch type | `string` | `"FARGATE"` | no |
 | <a name="input_lb_group_arn"></a> [lb\_group\_arn](#input\_lb\_group\_arn) | ARN of the load balancer to use | `string` | n/a | yes |
+| <a name="input_load_balancer_name"></a> [load\_balancer\_name](#input\_load\_balancer\_name) | The name of the load balancer. | `any` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | Application Name | `string` | n/a | yes |
 | <a name="input_naming_prefix"></a> [naming\_prefix](#input\_naming\_prefix) | Prefix to other resources | `any` | n/a | yes |
 | <a name="input_scale_level_1_adjustment"></a> [scale\_level\_1\_adjustment](#input\_scale\_level\_1\_adjustment) | n/a | `string` | `"1"` | no |

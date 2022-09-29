@@ -12,6 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+module "task" {
+  source = "github.com/nexient-llc/tf-aws-module-ecs_task.git"
+}
+
+# pull in variables and outputs.
+# Not exposed as an output.
+# size of task definition: the byte size.
+# Modify the ecs_task module to expose the variable that needs to be consumed and used here
+
+# Application load balancer decision based on architecture diagram.
+module "alb" {
+  source  = "terraform-aws-modules/alb/aws"
+  version = "8.1.0"
+
+  name               = var.load_balancer_name
+  load_balancer_type = var.load_balancer_type
+}
+
 resource "aws_ecs_service" "main" {
   name                               = var.name
   launch_type                        = var.launch_type

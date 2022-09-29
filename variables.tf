@@ -12,6 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+variable "task_cpu" {
+
+}
+
 variable "name" {
   description = "Application Name"
   type        = string
@@ -133,4 +137,8 @@ variable "tags" {
   description = "Tags to be applied to all resources created"
   type        = map(string)
   default     = {}
+}
+
+variable "load_balancer_name" {
+  description = "The name of the load balancer."
 }
