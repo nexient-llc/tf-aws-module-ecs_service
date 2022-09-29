@@ -15,6 +15,8 @@
 module "task" {
   source = "github.com/nexient-llc/tf-aws-module-ecs_task.git"
 
+  # below are already both outputs in the 
+  # Log Outputs of ecs_task
   log_group_name = var.log_group_name
   log_group_arn  = var.log_group_arn
 }
