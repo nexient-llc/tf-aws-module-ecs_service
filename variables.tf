@@ -147,3 +147,4 @@ variable "load_balancer_type" {
   description = "Load Balancer type"
   default = "application"
 }
+

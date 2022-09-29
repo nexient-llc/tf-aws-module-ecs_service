@@ -19,6 +19,13 @@ module "task" {
   # Log Outputs of ecs_task
   log_group_name = var.log_group_name
   log_group_arn  = var.log_group_arn
+
+# this will be exposed in ecs_task
+# do I really need to bring in the whole task definition?
+# I could probably bring in just the cpu and other relevant information. Bring in the object and then 
+
+
+  task_definition = var.task_definition
 }
 
 # pull in variables and outputs.
