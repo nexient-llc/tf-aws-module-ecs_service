@@ -142,3 +142,7 @@ variable "tags" {
 variable "load_balancer_name" {
   description = "The name of the load balancer."
 }
+
+variable "load_balancer_type" {
+  description = "Load Balancer type"
+}
