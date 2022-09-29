@@ -24,6 +24,8 @@ output "name" {
 
 # sample outputs for ALB
 
+# I think a lot of these variables will be unnecessary. 
+
 
 output "alb_name" {
   description = "The ARN suffix of the ALB"
