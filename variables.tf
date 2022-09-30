@@ -12,10 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-variable "task_cpu" {
-
-}
-
 variable "name" {
   description = "Application Name"
   type        = string
@@ -145,6 +141,16 @@ variable "load_balancer_name" {
 
 variable "load_balancer_type" {
   description = "Load Balancer type"
-  default = "application"
+  default     = "application"
 }
 
+variable "task_cpu" {
+  type        = number
+  description = "The task definition CPU."
+  default     = "256"
+}
+
+variable "task_name" {
+  type = string
+  description = "The task name"
+}

@@ -14,15 +14,15 @@
 
 module "task" {
   source = "github.com/nexient-llc/tf-aws-module-ecs_task.git"
-
+  name   = var.task_name
   # below are already both outputs in the 
   # Log Outputs of ecs_task
   log_group_name = var.log_group_name
-  log_group_arn  = var.log_group_arn
+  # log_group_arn  = var.log_group_arn
 
-# this will be exposed in ecs_task
-# do I really need to bring in the whole task definition?
-# I could probably bring in just the cpu and other relevant information. Bring in the object and then 
+  # this will be exposed in ecs_task
+  # do I really need to bring in the whole task definition?
+  # I could probably bring in just the cpu and other relevant information. Bring in the object and then 
 
 
   task_definition = var.task_definition
