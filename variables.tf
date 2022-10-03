@@ -151,6 +151,11 @@ variable "task_cpu" {
 }
 
 variable "task_name" {
-  type = string
+  type        = string
   description = "The task name"
+}
+
+variable "log_group_name" {
+  type        = string
+  description = "The log group name"
 }

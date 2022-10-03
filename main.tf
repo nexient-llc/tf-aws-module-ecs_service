@@ -24,8 +24,6 @@ module "task" {
   # do I really need to bring in the whole task definition?
   # I could probably bring in just the cpu and other relevant information. Bring in the object and then 
 
-
-  task_definition = var.task_definition
 }
 
 # pull in variables and outputs.
@@ -37,9 +35,6 @@ module "task" {
 module "alb" {
   source  = "terraform-aws-modules/alb/aws"
   version = "8.1.0"
-
-  name               = var.load_balancer_name
-  load_balancer_type = var.load_balancer_type
 
 }
 
