@@ -36,7 +36,9 @@ module "alb" {
   source  = "terraform-aws-modules/alb/aws"
   version = "8.1.0"
 
-  load_balancer_type = var.load_balancer_type
+  name               = var.lb_name
+  load_balancer_type = var.lb_type
+
 }
 
 resource "aws_ecs_service" "main" {

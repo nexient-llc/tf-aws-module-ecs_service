@@ -135,11 +135,11 @@ variable "tags" {
   default     = {}
 }
 
-variable "load_balancer_name" {
+variable "lb_name" {
   description = "The name of the load balancer."
 }
 
-variable "load_balancer_type" {
+variable "lb_type" {
   description = "Load Balancer type"
   default     = "application"
 }
