@@ -61,6 +61,8 @@ variable "security_groups" {
   default     = []
 }
 
+# this could be type = "map" . What decision went into list(string)
+# such as this example: https://stackoverflow.com/a/57884861
 variable "subnets" {
   description = "Provide list of subnets to run task(s) in"
   type        = list(string)
