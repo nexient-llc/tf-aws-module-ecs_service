@@ -27,12 +27,12 @@ output "name" {
 # I think a lot of these variables will be unnecessary. 
 
 
-output "lb_name" {
-  description = "The ARN suffix of the ALB"
-  value       = module.alb.lb_name
-}
+# output "lb_name" {
+#   description = "The ARN suffix of the ALB"
+#   value       = module.alb.lb_name
+# }
 
-output "lb_arn" {
-  description = "The ARN of the ALB"
-  value       = module.alb.lb_type
-}
+# output "lb_arn" {
+#   description = "The ARN of the ALB"
+#   value       = module.alb.lb_type
+# }

@@ -35,8 +35,11 @@ module "alb" {
   source  = "terraform-aws-modules/alb/aws"
   version = "8.1.0"
 
-  name               = var.lb_name
-  load_balancer_type = var.lb_type
+  name               = "lb-test"
+  load_balancer_type = "application"
+
+  #   name               = var.lb_name
+  # load_balancer_type = var.lb_type
 
 }
 
