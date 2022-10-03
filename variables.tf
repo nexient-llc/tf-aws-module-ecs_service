@@ -159,3 +159,7 @@ variable "log_group_name" {
   type        = string
   description = "The log group name"
 }
+
+variable "task_definition" {
+  type = string
+}

@@ -23,7 +23,7 @@ module "task" {
   # this will be exposed in ecs_task
   # do I really need to bring in the whole task definition?
   # I could probably bring in just the cpu and other relevant information. Bring in the object and then 
-
+  task_definition = var.task_definition
 }
 
 # pull in variables and outputs.
@@ -36,6 +36,7 @@ module "alb" {
   source  = "terraform-aws-modules/alb/aws"
   version = "8.1.0"
 
+  load_balancer_type = var.load_balancer_type
 }
 
 resource "aws_ecs_service" "main" {
