@@ -31,7 +31,6 @@ module "task" {
 # size of task definition: the byte size.
 # Modify the ecs_task module to expose the variable that needs to be consumed and used here
 
-# Application load balancer decision based on architecture diagram.
 module "alb" {
   source  = "terraform-aws-modules/alb/aws"
   version = "8.1.0"
