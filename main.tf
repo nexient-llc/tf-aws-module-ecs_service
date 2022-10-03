@@ -38,6 +38,9 @@ module "alb" {
   name               = var.lb_name
   load_balancer_type = var.lb_type
 
+  # guessing unecessary because it's used below.
+  # not defined in tfvars... sec_groups below reffed in tfvars
+  # security_groups = var.security_group
 }
 
 resource "aws_ecs_service" "main" {

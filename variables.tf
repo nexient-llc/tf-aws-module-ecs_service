@@ -161,5 +161,11 @@ variable "log_group_name" {
 }
 
 variable "task_definition" {
-  type = string
+  type        = string
+  description = "The task definition for the load balancer."
 }
+
+# variable "lb_security_group" {
+#   type = list(string)
+#   description = "The security groups for the load balancer."
+# }
