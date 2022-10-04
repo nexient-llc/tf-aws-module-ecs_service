@@ -107,6 +107,21 @@ variable "step_adjustments" {
   ]
 }
 
+variable "step_adjustments_objects" {
+  default = [
+    {
+      lower      = 200,
+      upper      = 300,
+      adjustment = 3,
+    },
+    {
+      lower      = 300,
+      upper      = 400,
+      adjustment = 4,
+    },
+  ]
+}
+
 variable "scale_level_1_lower" {
   default = "0"
 }

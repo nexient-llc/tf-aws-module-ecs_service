@@ -144,6 +144,16 @@ resource "aws_appautoscaling_policy" "scale_up" {
       }
     }
 
+    dynamic "step_adjustment" {
+      for_each = var.step_adjustments_objects
+
+      content {
+        metric_interval_lower_bound = step_adjustment.value["lower"]
+        metric_interval_upper_bound = step_adjustment.value["upper"]
+        scaling_adjustment          = step_adjustment.value["adjustment"]
+      }
+    }
+
     # step_adjustment {
     #   metric_interval_lower_bound = var.scale_level_1_lower
     #   metric_interval_upper_bound = var.scale_level_1_upper
