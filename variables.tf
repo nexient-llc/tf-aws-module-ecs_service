@@ -99,13 +99,13 @@ variable "wait_for_steady_state" {
   default     = false
 }
 
-variable "step_adjustments" {
-  default = [
-    [0, 100, 1],
-    [100, 200, 2],
-    [200, 300, 3],
-  ]
-}
+# variable "step_adjustments" {
+#   default = [
+#     [0, 100, 1],
+#     [100, 200, 2],
+#     [200, 300, 3],
+#   ]
+# }
 
 variable "step_adjustments_objects" {
   default = [

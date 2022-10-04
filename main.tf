@@ -134,15 +134,15 @@ resource "aws_appautoscaling_policy" "scale_up" {
     cooldown                = 60
     metric_aggregation_type = "Minimum"
 
-    dynamic "step_adjustment" {
-      for_each = var.step_adjustments
+    # dynamic "step_adjustment" {
+    #   for_each = var.step_adjustments
 
-      content {
-        metric_interval_lower_bound = step_adjustment.value[0]
-        metric_interval_upper_bound = step_adjustment.value[1]
-        scaling_adjustment          = step_adjustment.value[2]
-      }
-    }
+    #   content {
+    #     metric_interval_lower_bound = step_adjustment.value[0]
+    #     metric_interval_upper_bound = step_adjustment.value[1]
+    #     scaling_adjustment          = step_adjustment.value[2]
+    #   }
+    # }
 
     dynamic "step_adjustment" {
       for_each = var.step_adjustments_objects
