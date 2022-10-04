@@ -99,7 +99,7 @@ variable "wait_for_steady_state" {
   default     = false
 }
 
-variable "scale_adjustments" {
+variable "step_adjustments" {
   default = [
     [0, 100, 1],
     [100, 200, 2],

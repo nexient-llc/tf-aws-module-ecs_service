@@ -134,28 +134,38 @@ resource "aws_appautoscaling_policy" "scale_up" {
     cooldown                = 60
     metric_aggregation_type = "Minimum"
 
-    step_adjustment {
-      metric_interval_lower_bound = var.scale_level_1_lower
-      metric_interval_upper_bound = var.scale_level_1_upper
-      scaling_adjustment          = var.scale_level_1_adjustment
+    dynamic "step_adjustment" {
+      for_each = var.step_adjustments
+
+      content {
+        metric_interval_lower_bound = step_adjustment.value[0]
+        metric_interval_upper_bound = step_adjustment.value[1]
+        scaling_adjustment          = step_adjustment.value[2]
+      }
     }
 
-    step_adjustment {
-      metric_interval_lower_bound = var.scale_level_1_upper
-      metric_interval_upper_bound = var.scale_level_2_upper
-      scaling_adjustment          = var.scale_level_2_adjustment
-    }
+    # step_adjustment {
+    #   metric_interval_lower_bound = var.scale_level_1_lower
+    #   metric_interval_upper_bound = var.scale_level_1_upper
+    #   scaling_adjustment          = var.scale_level_1_adjustment
+    # }
 
-    step_adjustment {
-      metric_interval_lower_bound = var.scale_level_2_upper
-      metric_interval_upper_bound = var.scale_level_3_upper
-      scaling_adjustment          = var.scale_level_3_adjustment
-    }
+    # step_adjustment {
+    #   metric_interval_lower_bound = var.scale_level_1_upper
+    #   metric_interval_upper_bound = var.scale_level_2_upper
+    #   scaling_adjustment          = var.scale_level_2_adjustment
+    # }
 
-    step_adjustment {
-      metric_interval_lower_bound = var.scale_level_3_upper
-      metric_interval_upper_bound = ""
-      scaling_adjustment          = var.scale_level_4_adjustment
-    }
+    # step_adjustment {
+    #   metric_interval_lower_bound = var.scale_level_2_upper
+    #   metric_interval_upper_bound = var.scale_level_3_upper
+    #   scaling_adjustment          = var.scale_level_3_adjustment
+    # }
+
+    # step_adjustment {
+    #   metric_interval_lower_bound = var.scale_level_3_upper
+    #   metric_interval_upper_bound = ""
+    #   scaling_adjustment          = var.scale_level_4_adjustment
+    # }
   }
 }
