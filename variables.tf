@@ -12,10 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-variable "task_cpu" {
-
-}
-
 variable "name" {
   description = "Application Name"
   type        = string
@@ -65,6 +61,8 @@ variable "security_groups" {
   default     = []
 }
 
+# this could be type = "map" . What decision went into list(string)
+# such as this example: https://stackoverflow.com/a/57884861
 variable "subnets" {
   description = "Provide list of subnets to run task(s) in"
   type        = list(string)
@@ -139,11 +137,37 @@ variable "tags" {
   default     = {}
 }
 
-variable "load_balancer_name" {
+variable "lb_name" {
   description = "The name of the load balancer."
 }
 
-variable "load_balancer_type" {
+variable "lb_type" {
   description = "Load Balancer type"
-  default = "application"
+  default     = "application"
 }
+
+variable "task_cpu" {
+  type        = number
+  description = "The task definition CPU."
+  default     = "256"
+}
+
+variable "task_name" {
+  type        = string
+  description = "The task name"
+}
+
+variable "log_group_name" {
+  type        = string
+  description = "The log group name"
+}
+
+variable "task_definition" {
+  type        = string
+  description = "The task definition for the load balancer."
+}
+
+# variable "lb_security_group" {
+#   type = list(string)
+#   description = "The security groups for the load balancer."
+# }

@@ -14,9 +14,16 @@
 
 module "task" {
   source = "github.com/nexient-llc/tf-aws-module-ecs_task.git"
-
+  name   = var.task_name
+  # below are already both outputs in the 
+  # Log Outputs of ecs_task
   log_group_name = var.log_group_name
-  log_group_arn  = var.log_group_arn
+  # log_group_arn  = var.log_group_arn
+
+  # this will be exposed in ecs_task
+  # do I really need to bring in the whole task definition?
+  # I could probably bring in just the cpu and other relevant information. Bring in the object and then 
+  task_definition = var.task_definition
 }
 
 # pull in variables and outputs.
@@ -24,14 +31,16 @@ module "task" {
 # size of task definition: the byte size.
 # Modify the ecs_task module to expose the variable that needs to be consumed and used here
 
-# Application load balancer decision based on architecture diagram.
 module "alb" {
   source  = "terraform-aws-modules/alb/aws"
   version = "8.1.0"
 
-  name               = var.load_balancer_name
-  load_balancer_type = var.load_balancer_type
+  name               = var.lb_name
+  load_balancer_type = var.lb_type
 
+  # guessing unecessary because it's used below.
+  # not defined in tfvars... sec_groups below reffed in tfvars
+  # security_groups = var.security_group
 }
 
 resource "aws_ecs_service" "main" {
