@@ -20,6 +20,7 @@ module "task" {
   log_group_name = var.log_group_name
   # log_group_arn  = var.log_group_arn
 
+  task_definition = var.task_definition
   # this will be exposed in ecs_task
   container_definitions = var.container_definitions
 }

@@ -171,3 +171,8 @@ variable "container_definitions" {
 #   type = list(string)
 #   description = "The security groups for the load balancer."
 # }
+
+variable "task_definition" {
+  type        = string
+  description = "The task definition."
+}
