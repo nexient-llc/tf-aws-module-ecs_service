@@ -99,6 +99,14 @@ variable "wait_for_steady_state" {
   default     = false
 }
 
+variable "scale_adjustments" {
+  default = [
+    [0, 100, 1],
+    [100, 200, 2],
+    [200, 300, 3],
+  ]
+}
+
 variable "scale_level_1_lower" {
   default = "0"
 }
@@ -171,8 +179,3 @@ variable "container_definitions" {
 #   type = list(string)
 #   description = "The security groups for the load balancer."
 # }
-
-variable "task_definition" {
-  type        = string
-  description = "The task definition."
-}
