@@ -21,9 +21,7 @@ module "task" {
   # log_group_arn  = var.log_group_arn
 
   # this will be exposed in ecs_task
-  # do I really need to bring in the whole task definition?
-  # I could probably bring in just the cpu and other relevant information. Bring in the object and then 
-  task_definition = var.task_definition
+  container_definitions = var.container_definitions
 }
 
 # pull in variables and outputs.
@@ -131,6 +129,7 @@ resource "aws_appautoscaling_policy" "scale_up" {
   scalable_dimension = "ecs:service:DesiredCount"
   service_namespace  = "ecs"
 
+  # TODO: convert step adjustment to dynamic block
   step_scaling_policy_configuration {
     adjustment_type         = "ChangeInCapacity"
     cooldown                = 60

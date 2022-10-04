@@ -162,9 +162,9 @@ variable "log_group_name" {
   description = "The log group name"
 }
 
-variable "task_definition" {
+variable "container_definitions" {
   type        = string
-  description = "The task definition for the load balancer."
+  description = "The container definition for the load balancer."
 }
 
 # variable "lb_security_group" {
