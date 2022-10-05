@@ -61,8 +61,6 @@ variable "security_groups" {
   default     = []
 }
 
-# this could be type = "map" . What decision went into list(string)
-# such as this example: https://stackoverflow.com/a/57884861
 variable "subnets" {
   description = "Provide list of subnets to run task(s) in"
   type        = list(string)
@@ -99,14 +97,6 @@ variable "wait_for_steady_state" {
   default     = false
 }
 
-# variable "step_adjustments" {
-#   default = [
-#     [0, 100, 1],
-#     [100, 200, 2],
-#     [200, 300, 3],
-#   ]
-# }
-
 variable "step_adjustments_objects" {
   default = [
     {
@@ -121,38 +111,6 @@ variable "step_adjustments_objects" {
     },
   ]
 }
-
-# variable "scale_level_1_lower" {
-#   default = "0"
-# }
-
-# variable "scale_level_1_upper" {
-#   default = "100"
-# }
-
-# variable "scale_level_1_adjustment" {
-#   default = "1"
-# }
-
-# variable "scale_level_2_upper" {
-#   default = "200"
-# }
-
-# variable "scale_level_2_adjustment" {
-#   default = "2"
-# }
-
-# variable "scale_level_3_upper" {
-#   default = "300"
-# }
-
-# variable "scale_level_3_adjustment" {
-#   default = "3"
-# }
-
-# variable "scale_level_4_adjustment" {
-#   default = "4"
-# }
 
 variable "tags" {
   description = "Tags to be applied to all resources created"
@@ -189,8 +147,3 @@ variable "container_definitions" {
   type        = string
   description = "The container definition for the load balancer."
 }
-
-# variable "lb_security_group" {
-#   type = list(string)
-#   description = "The security groups for the load balancer."
-# }
