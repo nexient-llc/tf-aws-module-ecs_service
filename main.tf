@@ -21,6 +21,7 @@ module "task" {
   # log_group_arn  = var.log_group_arn
   # this will be exposed in ecs_task
   container_definitions = var.container_definitions
+  task_definition       = var.task_definition
 }
 
 module "alb" {
