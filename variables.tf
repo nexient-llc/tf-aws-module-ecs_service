@@ -122,37 +122,37 @@ variable "step_adjustments_objects" {
   ]
 }
 
-variable "scale_level_1_lower" {
-  default = "0"
-}
+# variable "scale_level_1_lower" {
+#   default = "0"
+# }
 
-variable "scale_level_1_upper" {
-  default = "100"
-}
+# variable "scale_level_1_upper" {
+#   default = "100"
+# }
 
-variable "scale_level_1_adjustment" {
-  default = "1"
-}
+# variable "scale_level_1_adjustment" {
+#   default = "1"
+# }
 
-variable "scale_level_2_upper" {
-  default = "200"
-}
+# variable "scale_level_2_upper" {
+#   default = "200"
+# }
 
-variable "scale_level_2_adjustment" {
-  default = "2"
-}
+# variable "scale_level_2_adjustment" {
+#   default = "2"
+# }
 
-variable "scale_level_3_upper" {
-  default = "300"
-}
+# variable "scale_level_3_upper" {
+#   default = "300"
+# }
 
-variable "scale_level_3_adjustment" {
-  default = "3"
-}
+# variable "scale_level_3_adjustment" {
+#   default = "3"
+# }
 
-variable "scale_level_4_adjustment" {
-  default = "4"
-}
+# variable "scale_level_4_adjustment" {
+#   default = "4"
+# }
 
 variable "tags" {
   description = "Tags to be applied to all resources created"
